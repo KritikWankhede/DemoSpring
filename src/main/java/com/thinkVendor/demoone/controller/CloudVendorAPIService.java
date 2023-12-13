@@ -1,7 +1,10 @@
 package com.thinkVendor.demoone.controller;
 
 import com.thinkVendor.demoone.CloudVendor;
+import com.thinkVendor.demoone.response.ResponseHandler;
 import com.thinkVendor.demoone.service.CloudVendorServices;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,8 +20,8 @@ public class CloudVendorAPIService {
     }
 
     @GetMapping("{vendorId}")
-        public CloudVendor getCloudVendorDetails(@PathVariable("vendorId") String vendorId){
-            return  cloudVendorServices.getCloudVendor( vendorId);
+        public ResponseEntity<Object> getCloudVendorDetails(@PathVariable("vendorId") String vendorId){
+            return ResponseHandler.responseBuilder("Requested Vendor Details Are Present.", HttpStatus.OK,cloudVendorServices.getCloudVendor(vendorId));
         }
     @GetMapping()
         public List<CloudVendor> getAllCloudVendorDetails(){

@@ -1,8 +1,11 @@
 package com.thinkVendor.demoone.implement;
 
 import com.thinkVendor.demoone.CloudVendor;
+import com.thinkVendor.demoone.exception.CloudVendorNotFoundException;
 import com.thinkVendor.demoone.repository.CloudVendorRepository;
+import com.thinkVendor.demoone.response.ResponseHandler;
 import com.thinkVendor.demoone.service.CloudVendorServices;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -35,6 +38,10 @@ public class CloudServiceImplementation implements CloudVendorServices {
 
     @Override
     public CloudVendor getCloudVendor(String cloudVendorId) {
+        if(cloudVendorRepository.findById(cloudVendorId).isEmpty()){
+            throw new CloudVendorNotFoundException("Requested Cloud Vendor does not Exist.");
+        }
+
         return cloudVendorRepository.findById(cloudVendorId).get();
 
     }
