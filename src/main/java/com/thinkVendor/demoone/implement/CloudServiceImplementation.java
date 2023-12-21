@@ -33,7 +33,7 @@ public class CloudServiceImplementation implements CloudVendorServices {
     @Override
     public String deleteCloudVendor(String cloudVendorId) {
         cloudVendorRepository.deleteById(cloudVendorId);
-        return "Successfully Deleted";
+        return "Successfully Deleted.";
     }
 
     @Override
@@ -49,5 +49,13 @@ public class CloudServiceImplementation implements CloudVendorServices {
     @Override
     public List<CloudVendor> listOfCloudVendor() {
         return cloudVendorRepository.findAll();
+    }
+
+    @Override
+    public List<CloudVendor> getCloudVendorByName(String cloudVendorName) {
+        if(cloudVendorRepository.findByVendorName(cloudVendorName).isEmpty()){
+            throw new CloudVendorNotFoundException("Requested Cloud Vendor does not Exist.");
+        }
+        return cloudVendorRepository.findByVendorName(cloudVendorName);
     }
 }

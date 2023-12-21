@@ -12,21 +12,23 @@ import java.util.List;
 @RestController
 @RequestMapping("/cloudVendor")
 public class CloudVendorAPIService {
-    CloudVendor cv;
-    CloudVendorServices cloudVendorServices;
+        CloudVendor cv;
+        CloudVendorServices cloudVendorServices;
 
-    public CloudVendorAPIService(CloudVendorServices cloudVendorServices) {
-        this.cloudVendorServices = cloudVendorServices;
-    }
+         public CloudVendorAPIService(CloudVendorServices cloudVendorServices) {
+            this.cloudVendorServices = cloudVendorServices;
+         }
 
-    @GetMapping("{vendorId}")
+        @GetMapping("{vendorId}")
         public ResponseEntity<Object> getCloudVendorDetails(@PathVariable("vendorId") String vendorId){
             return ResponseHandler.responseBuilder("Requested Vendor Details Are Present.", HttpStatus.OK,cloudVendorServices.getCloudVendor(vendorId));
         }
-    @GetMapping()
+
+        @GetMapping()
         public List<CloudVendor> getAllCloudVendorDetails(){
             return cloudVendorServices.listOfCloudVendor();
         }
+
         @PostMapping
         public String createCloudVendor(@RequestBody CloudVendor cv){
             cloudVendorServices.createCloudVendor(cv);

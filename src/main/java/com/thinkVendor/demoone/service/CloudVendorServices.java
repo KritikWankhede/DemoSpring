@@ -13,4 +13,6 @@ public interface CloudVendorServices {
 
     public List<CloudVendor> listOfCloudVendor();
 
+    public List<CloudVendor> getCloudVendorByName( String cloudVendorName);
+
 }
